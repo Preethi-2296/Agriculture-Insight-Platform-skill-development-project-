@@ -1,0 +1,3525 @@
+/*
+ * Author       : preethi2410429_ssn
+ * Generated on : 01-Mar-2026 21:50:13
+ * Version      : 1.0
+ */
+ application "Agricultural Insight Platform"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+ 	forms
+	{
+		form ai_query
+		{
+			displayname = "AI Query"
+			success message = "Ai Query Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			query_text
+			(
+    			type = textarea
+				displayname = "Query Text"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			response_text
+			(
+    			type = textarea
+				displayname = "Response Text"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			query_timestamp
+			(
+    			type = datetime
+				displayname = "Query Timestamp"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			user_query_id
+			(
+    			type = autonumber
+				displayname = "User Query Id"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			related_crop
+			(
+				type = list	
+				displayname = "Related Crop"
+				values  = crop_recommendation.ID
+    			displayformat = [recommended_crop]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form crop_recommendation
+		{
+			displayname = "Crop Recommendation"
+			success message = "Crop Recommendation Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			soil_type
+			(
+				type = picklist
+				displayname = "Soil Type"
+				values = {"Clay","Chalky","Sandy","Loam","Peat"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			climate_zone
+			(
+				type = picklist
+				displayname = "Climate Zone"
+				values = {"Arid","Temperate","Subtropical","Semi-arid","Tropical"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			historical_yield
+			(
+				type = number
+				displayname = "Historical Yield"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			recommended_crop
+			(
+    			type = text
+				displayname = "Recommended Crop"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			season
+			(
+				type = picklist
+				displayname = "Season"
+				values = {"Winter","Autumn","Summer","Spring"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			soil_ph
+			(
+				type = decimal
+				displayname = "Soil PH"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			moisture_level
+			(
+				type = picklist
+				displayname = "Moisture Level"
+				values = {"High","Moderate","Dry"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			suggestion_date
+			(
+    			type = date
+				displayname = "Suggestion Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			last_updated
+			(
+    			type = datetime
+				displayname = "Last Updated"
+				timedisplayoptions = "hh:mm:ss"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			recommendation_id
+			(
+    			type = autonumber
+				displayname = "Recommendation Id"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Crop Recommendation Requested","Data Validation In Progress","Recommendation Generation Failed","Recommendation Generation In Progress","Recommendation Generated","Recommendation Reviewed","Recommendation Rejected","Recommendation Approved","Recommendation Published","Recommendation Archived","Recommendation Updated"}
+			}
+		}
+		form farm_data
+		{
+			displayname = "Farm Data"
+			success message = "Farm Datum Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			farm_name
+			(
+    			type = text
+				displayname = "Farm Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			location
+			(
+    			type = text
+				displayname = "Location"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			planting_date
+			(
+    			type = date
+				displayname = "Planting Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			irrigation_schedule
+			(
+    			type = text
+				displayname = "Irrigation Schedule"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			harvest_output
+			(
+				type = number
+				displayname = "Harvest Output"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			crop_type
+			(
+    			type = text
+				displayname = "Crop Type"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			soil_test_id
+			(
+				type = list	
+				displayname = "Soil Test Id"
+				values  = soil_test.ID
+    			displayformat = [soil_test_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			farm_manager
+			(
+    			type = text
+				displayname = "Farm Manager"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form farm_layout
+		{
+			displayname = "Farm Layout"
+			success message = "Farm Layout Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			layout_name
+			(
+    			type = text
+				displayname = "Layout Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			farm_name
+			(
+				type = list	
+				displayname = "Farm Name"
+				values  = farm_data.ID
+    			displayformat = [farm_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ai_generated_image
+			(
+    			type = url
+				displayname = "AI Generated Image"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			crop_rotation_plan
+			(
+    			type = textarea
+				displayname = "Crop Rotation Plan"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			planning_date
+			(
+    			type = date
+				displayname = "Planning Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			layout_version
+			(
+    			type = text
+				displayname = "Layout Version"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			visual_description
+			(
+    			type = textarea
+				displayname = "Visual Description"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			area_size
+			(
+				type = number
+				displayname = "Area Size"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			designer
+			(
+    			type = text
+				displayname = "Designer"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form soil_health_analysis
+		{
+			displayname = "Soil Health Analysis"
+			success message = "Soil Health Analysis Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			soil_test_id
+			(
+				type = list	
+				displayname = "Soil Test Id"
+				values  = soil_test.ID
+    			displayformat = [soil_test_id]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			trend_period
+			(
+				type = picklist
+				displayname = "Trend Period"
+				values = {"6 Months","1 Year","3 Years","3 Months"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			health_score
+			(
+				type = number
+				displayname = "Health Score"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			recommendation
+			(
+    			type = textarea
+				displayname = "Recommendation"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			analysis_date
+			(
+    			type = date
+				displayname = "Analysis Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			trend_direction
+			(
+				type = picklist
+				displayname = "Trend Direction"
+				values = {"Increasing","Decreasing","Stable"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			action_plan
+			(
+    			type = textarea
+				displayname = "Action Plan"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			analyst
+			(
+    			type = text
+				displayname = "Analyst"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Soil Test Initiated","Sample Collected","Test Cancelled","Sample Received in Lab","Testing In Progress","Analysis Complete","Recommendation Drafted","Recommendation Reviewed","Recommendation Approved","Recommendation Rejected","Analysis Published","Recommendation Revised","Analysis Archived","Analysis Updated"}
+			}
+		}
+		form soil_test
+		{
+			displayname = "Soil Test"
+			success message = "Soil Test Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			soil_test_id
+			(
+    			type = autonumber
+				displayname = "Soil Test Id"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			farm_name
+			(
+				type = list	
+				displayname = "Farm Name"
+				values  = farm_data.ID
+    			displayformat = [farm_name]
+				allow new entries
+				[
+					displayname = "Add New"
+				]
+				sortorder = ascending
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			test_date
+			(
+    			type = date
+				displayname = "Test Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ph_level
+			(
+				type = decimal
+				displayname = "PH Level"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			nitrogen
+			(
+				type = number
+				displayname = "Nitrogen"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			phosphorus
+			(
+				type = number
+				displayname = "Phosphorus"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			potassium
+			(
+				type = number
+				displayname = "Potassium"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			organic_matter
+			(
+    			type = percentage
+				displayname = "Organic Matter"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			test_result
+			(
+				type = picklist
+				displayname = "Test Result"
+				values = {"Moderate","Poor","Good"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			soil_health_trend
+			(
+				type = picklist
+				displayname = "Soil Health Trend"
+				values = {"Declining","Stable","Improving"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		form weather_forecast
+		{
+			displayname = "Weather Forecast"
+			success message = "Weather Forecast Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			location
+			(
+    			type = text
+				displayname = "Location"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			forecast_date
+			(
+    			type = date
+				displayname = "Forecast Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			temperature
+			(
+				type = number
+				displayname = "Temperature"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			precipitation
+			(
+				type = number
+				displayname = "Precipitation"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			wind_speed
+			(
+				type = number
+				displayname = "Wind Speed"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			humidity
+			(
+    			type = percentage
+				displayname = "Humidity"
+				maxchar = 16
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			weather_condition
+			(
+				type = picklist
+				displayname = "Weather Condition"
+				values = {"Rainy","Stormy","Partly Cloudy","Cloudy","Sunny"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			alert_level
+			(
+				type = picklist
+				displayname = "Alert Level"
+				values = {"High","Low","Medium"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			forecast_id
+			(
+    			type = autonumber
+				displayname = "Forecast Id"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+	}
+	reports
+	{
+		list farm_data_Report
+		{
+			displayName = "All Farm Data"
+			show all rows from farm_data    
+			(
+				farm_name as "Farm Name"
+				location as "Location"
+				planting_date as "Planting Date"
+				irrigation_schedule as "Irrigation Schedule"
+				harvest_output as "Harvest Output"
+				crop_type as "Crop Type"
+				soil_test_id as "Soil Test Id"
+				farm_manager as "Farm Manager"
+			)
+		}
+		list ai_query_Report
+		{
+			displayName = "All Ai Queries"
+			show all rows from ai_query    
+			(
+				query_text as "Query Text"
+				response_text as "Response Text"
+				query_timestamp as "Query Timestamp"
+				user_query_id as "User Query Id"
+				related_crop as "Related Crop"
+			)
+		}
+		list soil_test_Report
+		{
+			displayName = "All Soil Tests"
+			show all rows from soil_test    
+			(
+				soil_test_id as "Soil Test Id"
+				farm_name as "Farm Name"
+				test_date as "Test Date"
+				ph_level as "PH Level"
+				nitrogen as "Nitrogen"
+				phosphorus as "Phosphorus"
+				potassium as "Potassium"
+				organic_matter as "Organic Matter"
+				(
+					display = total,average,min,max	
+				)
+				test_result as "Test Result"
+				soil_health_trend as "Soil Health Trend"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (test_result == "Good")
+				fields = [test_result]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (test_result == "Poor")
+				fields = [test_result]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban soil_test_by_test_result
+		{
+			displayName = "Test Results"
+			show all rows from soil_test    
+			(
+				soil_test_id as "Soil Test Id"
+				farm_name as "Farm Name"
+				test_date as "Test Date"
+				ph_level as "PH Level"
+				nitrogen as "Nitrogen"
+				phosphorus as "Phosphorus"
+				potassium as "Potassium"
+				organic_matter as "Organic Matter"
+				(
+					display = total,average,min,max	
+				)
+				test_result as "Test Result"
+				soil_health_trend as "Soil Health Trend"
+			)
+			options
+			(
+	 			display field = test_result
+	 		)
+		}
+		list crop_recommendation_Report
+		{
+			displayName = "All Crop Recommendations"
+			show all rows from crop_recommendation    
+			(
+				soil_type as "Soil Type"
+				climate_zone as "Climate Zone"
+				historical_yield as "Historical Yield"
+				recommended_crop as "Recommended Crop"
+				season as "Season"
+				soil_ph as "Soil PH"
+				moisture_level as "Moisture Level"
+				suggestion_date as "Suggestion Date"
+				last_updated as "Last Updated"
+				recommendation_id as "Recommendation Id"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (soil_type == "Loam")
+				fields = [soil_type]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (soil_type == "Peat")
+				fields = [soil_type]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (soil_type == "Sandy")
+				fields = [soil_type]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban crop_recommendation_by_soil_type
+		{
+			displayName = "Soil Types"
+			show all rows from crop_recommendation    
+			(
+				soil_type as "Soil Type"
+				climate_zone as "Climate Zone"
+				historical_yield as "Historical Yield"
+				recommended_crop as "Recommended Crop"
+				season as "Season"
+				soil_ph as "Soil PH"
+				moisture_level as "Moisture Level"
+				suggestion_date as "Suggestion Date"
+				last_updated as "Last Updated"
+				recommendation_id as "Recommendation Id"
+			)
+			options
+			(
+	 			display field = soil_type
+	 		)
+		}
+		list farm_layout_Report
+		{
+			displayName = "All Farm Layouts"
+			show all rows from farm_layout    
+			(
+				layout_name as "Layout Name"
+				farm_name as "Farm Name"
+				ai_generated_image as "AI Generated Image"
+				crop_rotation_plan as "Crop Rotation Plan"
+				planning_date as "Planning Date"
+				layout_version as "Layout Version"
+				visual_description as "Visual Description"
+				area_size as "Area Size"
+				designer as "Designer"
+			)
+		}
+		list weather_forecast_Report
+		{
+			displayName = "All Weather Forecasts"
+			show all rows from weather_forecast    
+			(
+				location as "Location"
+				forecast_date as "Forecast Date"
+				temperature as "Temperature"
+				precipitation as "Precipitation"
+				wind_speed as "Wind Speed"
+				humidity as "Humidity"
+				(
+					display = total,average,min,max	
+				)
+				weather_condition as "Weather Condition"
+				alert_level as "Alert Level"
+				forecast_id as "Forecast Id"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (weather_condition == "Partly Cloudy")
+				fields = [weather_condition]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (weather_condition == "Rainy")
+				fields = [weather_condition]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (weather_condition == "Stormy")
+				fields = [weather_condition]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban weather_forecast_by_weather_condition
+		{
+			displayName = "Weather Conditions"
+			show all rows from weather_forecast    
+			(
+				location as "Location"
+				forecast_date as "Forecast Date"
+				temperature as "Temperature"
+				precipitation as "Precipitation"
+				wind_speed as "Wind Speed"
+				humidity as "Humidity"
+				(
+					display = total,average,min,max	
+				)
+				weather_condition as "Weather Condition"
+				alert_level as "Alert Level"
+				forecast_id as "Forecast Id"
+			)
+			options
+			(
+	 			display field = weather_condition
+	 		)
+		}
+		list soil_health_analysis_Report
+		{
+			displayName = "All Soil Health Analyses"
+			show all rows from soil_health_analysis    
+			(
+				soil_test_id as "Soil Test Id"
+				trend_period as "Trend Period"
+				health_score as "Health Score"
+				recommendation as "Recommendation"
+				analysis_date as "Analysis Date"
+				trend_direction as "Trend Direction"
+				action_plan as "Action Plan"
+				analyst as "Analyst"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (trend_period == "1 Year")
+				fields = [trend_period]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (trend_period == "3 Months")
+				fields = [trend_period]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+				"New Formatting3"
+				{
+				condition = (trend_period == "6 Months")
+				fields = [trend_period]
+				format = "color:#ffffff;background-color:#e84c3d;"
+				}
+			)
+		}
+		kanban soil_health_analysis_by_trend_period
+		{
+			displayName = "Trend Periods"
+			show all rows from soil_health_analysis    
+			(
+				soil_test_id as "Soil Test Id"
+				trend_period as "Trend Period"
+				health_score as "Health Score"
+				recommendation as "Recommendation"
+				analysis_date as "Analysis Date"
+				trend_direction as "Trend Direction"
+				action_plan as "Action Plan"
+				analyst as "Analyst"
+			)
+			options
+			(
+	 			display field = trend_period
+	 		)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='75%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#5A3D9B'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'weather-drops'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.soil_test.ph_level.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average Ph Levels'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='26%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'clothes-wash'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.soil_test.organic_matter.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#E7E7E7'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average Organic Matters'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#9366F9'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpadding = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#AF8CFF'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'nature-plant-ground'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.crop_recommendation.soil_ph.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average Soil Ph'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column><column\n   \t\t width='24%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '20px'\n\tbgColor = '#734AD0'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#9B69FB'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'business-percentage-38'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '12px'\n\tcolor = '#FFFFFF'\n\tsize = '24px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tdecimalPlaces = '2'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.weather_forecast.humidity.avg'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginTop = '5px'\n\tcolor = '#FFFFFF'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Average Humidities'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Grouped_Panel 1'\n \n\t\n\ttitle = 'Soil Health Trends'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '17px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '24%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1ABE75'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'arrows-1-simple-down'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'soil_health_trend == &quot;Declining&quot;'\n\t  value = 'thisapp.soil_test.soil_health_trend.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Declining'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '24%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#E2335C'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'health-apple'\n\tsize = '20px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'soil_health_trend == &quot;Stable&quot;'\n\t  value = 'thisapp.soil_test.soil_health_trend.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Stable'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '25%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#1678F9'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'envir-home'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '22px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'soil_health_trend == &quot;Improving&quot;'\n\t  value = 'thisapp.soil_test.soil_health_trend.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Improving'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '17px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '17px'\n\tpaddingBottom = '17px'\n\n\t\twidth = '27%'\n\t\thAlign = 'center'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginLeft = '0px'\n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#FFFFFF'\n\tbgColor = '#F6BC2B'\n\twidth = '52px'\n\theight = '52px'\n\ttype = 'icon'\n\tvalue = 'travel-world'\n\tsize = '22px'\n\tcornerRadius = '10px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n\t\thAlign = 'left'\n>\n\t<pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tcolor = '#3F3F3F'\n\tsize = '20px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.soil_test.soil_health_trend.count'\n>\n</text>\n\n</pc>\n</pr><pr \n\t>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '20px'\n\tmarginRight = '0px' \n\tmarginTop = '3px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Total'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column><column\n   \t\t width='25%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 1'\n \n\t\n\ttitle = 'Quick Links'\n\t\n\t\ttitleSize = '15px'\n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'farm_data'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Farm Data'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'ai_query'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New AI Query'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'soil_test'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Soil Test'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel_Button 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tbgColor = '#8A3DFB'\n\n\t\twidth = '2%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '10px'\n\tpaddingLeft = '10px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '98%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\tmarginRight = '10px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\n\tcolor = '#2C0D4A'\n\tbgColor = '#F4F0FF'\n\twidth = '36px'\n\theight = '36px'\n\ttype = 'icon'\n\tvalue = 'ui-2-square-add-08'\n\tsize = '16px'\n\tcornerRadius = '18px'\n\ticonType = 'outline'\n/>\n</pc><pc \n\t\n>\n\t<text \n    action = 'OpenForm'\n\t\tcomponentLinkName = 'crop_recommendation'\n\t\ttarget = 'new-window'\n\n\tcolor = '#6733AB'\n\tsize = '15px'\n\ttype = 'Text'\n\n\n\n\n\n\n\n\t  value = 'Add New Crop Recommendation'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Wind Speed by Precipitation'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Scatter'\n\txtitle = 'Wind Speed'\n\tytitle = 'Precipitation'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'weather_forecast'\n\txfield = 'wind_speed'\n\tyfields = 'value:precipitation'\n\t\tDelugeCriteria = 'wind_speed is not null'\n/>\n\n</column><column\n   \t\t width='50%'\n   \t>\n\t<chart \n\telementName='Chart 2'\n\n\t\n\ttitle = 'Phosphorus by Nitrogen'\n\t\n\t\ttitleSize = '15px'\n\ttype = 'Scatter'\n\txtitle = 'Phosphorus'\n\tytitle = 'Nitrogen'\n\tbgColor = '#FFFFFF'\n\ttheme = '#198391'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'soil_test'\n\txfield = 'phosphorus'\n\tyfields = 'value:nitrogen'\n\t\tDelugeCriteria = 'phosphorus is not null'\n/>\n\n</column>\n</row>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'farm_data_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'custom'\n\theightValue = '500'\n\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+		workflow
+		{
+
+
+
+
+		blueprint
+		{
+    			crop_recommendation_workflow as "Crop Recommendation Workflow"
+    			{
+        			type = Blueprint
+        			form = crop_recommendation
+        			start
+        			{
+            			start stage = "Crop Recommendation Requested"
+        			}
+        			stages
+        			{
+           			"Crop Recommendation Requested"
+           			{
+           			}
+           			"Data Validation In Progress"
+           			{
+           			}
+           			"Recommendation Generation Failed"
+           			{
+           			}
+           			"Recommendation Generation In Progress"
+           			{
+           			}
+           			"Recommendation Generated"
+           			{
+           			}
+           			"Recommendation Reviewed"
+           			{
+           			}
+           			"Recommendation Rejected"
+           			{
+           			}
+           			"Recommendation Approved"
+           			{
+           			}
+           			"Recommendation Published"
+           			{
+           			}
+           			"Recommendation Archived"
+           			{
+           			}
+           			"Recommendation Updated"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+    				approve_recommendation as "Approve Final Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Reviewed"
+         				to stage = "Recommendation Approved"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				archive_failed as "Archive Failed Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Generation Failed"
+         				to stage = "Recommendation Archived"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				archive_recommendation as "Archive Recommendation Record"
+    				{
+         				type = normal
+         				from stage = "Recommendation Published"
+         				to stage = "Recommendation Archived"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				archive_rejected as "Archive Rejected Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Rejected"
+         				to stage = "Recommendation Archived"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				fail_validation as "Fail Process Due to Invalid Data"
+    				{
+         				type = normal
+         				from stage = "Crop Recommendation Requested"
+         				to stage = "Recommendation Generation Failed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				finalize_recommendation as "Finalize Crop Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Generation In Progress"
+         				to stage = "Recommendation Generated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				publish_recommendation as "Publish Recommendation to Farmer Portal"
+    				{
+         				type = normal
+         				from stage = "Recommendation Approved"
+         				to stage = "Recommendation Published"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				publish_updated as "Re-publish Updated Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Updated"
+         				to stage = "Recommendation Published"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reject_recommendation as "Reject Recommendation and Request Re-evaluation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Generated"
+         				to stage = "Recommendation Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				retry_recommendation as "Retry or Flag for Manual Review"
+    				{
+         				type = normal
+         				from stage = "Recommendation Generation In Progress"
+         				to stage = "Recommendation Generation Failed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				review_recommendation as "Review Recommendation by Agricultural Expert"
+    				{
+         				type = normal
+         				from stage = "Recommendation Generated"
+         				to stage = "Recommendation Reviewed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				start_recommendation as "Proceed to Crop Recommendation Engine"
+    				{
+         				type = normal
+         				from stage = "Data Validation In Progress"
+         				to stage = "Recommendation Generation In Progress"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				update_recommendation as "Update Recommendation Based on New Data"
+    				{
+         				type = normal
+         				from stage = "Recommendation Published"
+         				to stage = "Recommendation Updated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				validate_data as "Validate Input Data"
+    				{
+         				type = normal
+         				from stage = "Crop Recommendation Requested"
+         				to stage = "Data Validation In Progress"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+        			}
+    			}
+    			soil_health_monitoring_cycle as "Soil Health Monitoring Cycle"
+    			{
+        			type = Blueprint
+        			form = soil_health_analysis
+        			start
+        			{
+            			start stage = "Soil Test Initiated"
+        			}
+        			stages
+        			{
+           			"Soil Test Initiated"
+           			{
+           			}
+           			"Sample Collected"
+           			{
+           			}
+           			"Test Cancelled"
+           			{
+           			}
+           			"Sample Received in Lab"
+           			{
+           			}
+           			"Testing In Progress"
+           			{
+           			}
+           			"Analysis Complete"
+           			{
+           			}
+           			"Recommendation Drafted"
+           			{
+           			}
+           			"Recommendation Reviewed"
+           			{
+           			}
+           			"Recommendation Approved"
+           			{
+           			}
+           			"Recommendation Rejected"
+           			{
+           			}
+           			"Analysis Published"
+           			{
+           			}
+           			"Recommendation Revised"
+           			{
+           			}
+           			"Analysis Archived"
+           			{
+           			}
+           			"Analysis Updated"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+    				approve_recommendation as "Approve Soil Health Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Reviewed"
+         				to stage = "Recommendation Approved"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				archive_analysis as "Archive Soil Health Analysis"
+    				{
+         				type = normal
+         				from stage = "Analysis Published"
+         				to stage = "Analysis Archived"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				cancel_test as "Cancel Soil Test"
+    				{
+         				type = normal
+         				from stage = "Soil Test Initiated"
+         				to stage = "Test Cancelled"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				collect_sample as "Collect Soil Sample"
+    				{
+         				type = normal
+         				from stage = "Soil Test Initiated"
+         				to stage = "Sample Collected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				complete_testing as "Complete All Tests"
+    				{
+         				type = normal
+         				from stage = "Testing In Progress"
+         				to stage = "Analysis Complete"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				draft_recommendation as "Draft Soil Health Recommendation"
+    				{
+         				type = normal
+         				from stage = "Analysis Complete"
+         				to stage = "Recommendation Drafted"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				publish_analysis as "Publish Soil Health Analysis"
+    				{
+         				type = normal
+         				from stage = "Recommendation Approved"
+         				to stage = "Analysis Published"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				publish_updated_analysis as "Publish Updated Analysis"
+    				{
+         				type = normal
+         				from stage = "Analysis Updated"
+         				to stage = "Analysis Published"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				receive_sample as "Receive Sample in Laboratory"
+    				{
+         				type = normal
+         				from stage = "Sample Collected"
+         				to stage = "Sample Received in Lab"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				reject_recommendation as "Reject Recommendation for Revision"
+    				{
+         				type = normal
+         				from stage = "Recommendation Reviewed"
+         				to stage = "Recommendation Rejected"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				resubmit_review as "Resubmit for Review"
+    				{
+         				type = normal
+         				from stage = "Recommendation Revised"
+         				to stage = "Recommendation Reviewed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				review_recommendation as "Review Recommendation"
+    				{
+         				type = normal
+         				from stage = "Recommendation Drafted"
+         				to stage = "Recommendation Reviewed"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				revise_recommendation as "Revise Recommendation Based on Feedback"
+    				{
+         				type = normal
+         				from stage = "Recommendation Rejected"
+         				to stage = "Recommendation Revised"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				start_testing as "Begin Laboratory Testing"
+    				{
+         				type = normal
+         				from stage = "Sample Received in Lab"
+         				to stage = "Testing In Progress"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+    				update_analysis as "Update Analysis with New Data"
+    				{
+         				type = normal
+         				from stage = "Analysis Published"
+         				to stage = "Analysis Updated"
+         				before
+         				{
+         				}
+         				after
+         				{
+         				}
+  				}
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Farm Manager"
+			{
+				name = "Farm Manager"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Oversee daily farm operations and crop planning \n"
+				ModulePermissions
+				{
+					farm_layout
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_layout_Report={"Edit"}
+						}
+					}
+					soil_health_analysis
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View"}
+							soil_health_analysis_Report={"View"}
+						}
+					}
+					farm_data
+					{
+						enabled= Create,Viewall,Modifyall,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View","Edit","Delete"}
+						}
+					}
+					crop_recommendation
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View"}
+							crop_recommendation_by_soil_type={"View"}
+						}
+					}
+					soil_test
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"Edit"}
+							soil_test_Report={"Edit"}
+						}
+					}
+					weather_forecast
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							weather_forecast_Report={"View"}
+							weather_forecast_by_weather_condition={"View"}
+						}
+					}
+				}
+			}
+			"Agricultural Analyst"
+			{
+				name = "Agricultural Analyst"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Analyze soil health trends and generate actionable insights \n"
+				ModulePermissions
+				{
+					soil_test
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"View"}
+							soil_test_Report={"View"}
+						}
+					}
+					soil_health_analysis
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View","Edit","Delete"}
+							soil_health_analysis_Report={"View","Edit","Delete"}
+						}
+					}
+					farm_data
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View"}
+						}
+					}
+					weather_forecast
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							weather_forecast_Report={"View"}
+							weather_forecast_by_weather_condition={"View"}
+						}
+					}
+					crop_recommendation
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View"}
+							crop_recommendation_by_soil_type={"View"}
+						}
+					}
+				}
+			}
+			"AI Support Specialist"
+			{
+				name = "AI Support Specialist"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Monitor and maintain the AI-driven crop recommendation engine \n"
+				ModulePermissions
+				{
+					soil_test
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"View","Edit","Delete"}
+							soil_test_Report={"View","Edit","Delete"}
+						}
+					}
+					ai_query
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							ai_query_Report={"View","Edit","Delete"}
+						}
+					}
+					soil_health_analysis
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View","Edit","Delete"}
+							soil_health_analysis_Report={"View","Edit","Delete"}
+						}
+					}
+					farm_data
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View","Edit","Delete"}
+						}
+					}
+					crop_recommendation
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View","Edit","Delete"}
+							crop_recommendation_by_soil_type={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Smallholder Farmer"
+			{
+				name = "Smallholder Farmer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Receive AI-powered crop recommendations tailored to soil and climate \n"
+				ModulePermissions
+				{
+					farm_layout
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_layout_Report={"View"}
+						}
+					}
+					soil_health_analysis
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View"}
+							soil_health_analysis_Report={"View"}
+						}
+					}
+					farm_data
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View"}
+						}
+					}
+					crop_recommendation
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View"}
+							crop_recommendation_by_soil_type={"View"}
+						}
+					}
+					soil_test
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"View"}
+							soil_test_Report={"View"}
+						}
+					}
+					ai_query
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							ai_query_Report={"View"}
+						}
+					}
+					weather_forecast
+					{
+						enabled= Viewall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							weather_forecast_Report={"View"}
+							weather_forecast_by_weather_condition={"View"}
+						}
+					}
+				}
+			}
+			"submission"
+			{
+				name = "submission"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "submission Profile\n"
+				ModulePermissions
+				{
+					farm_layout
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_layout_Report={"View"}
+						}
+					}
+					soil_health_analysis
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View"}
+							soil_health_analysis_Report={"View"}
+						}
+					}
+					farm_data
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View"}
+						}
+					}
+					crop_recommendation
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View"}
+							crop_recommendation_by_soil_type={"View"}
+						}
+					}
+					soil_test
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"View"}
+							soil_test_Report={"View"}
+						}
+					}
+					ai_query
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							ai_query_Report={"View"}
+						}
+					}
+					crop_recommendation_BlueprintJob
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					weather_forecast
+					{
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							weather_forecast_Report={"View"}
+							weather_forecast_by_weather_condition={"View"}
+						}
+					}
+					soil_health_analysis_BlueprintJob
+					{
+						enabled= Create,Tab 
+						allFieldsVisible= true 
+					}
+					DashBoard
+					{
+						enabled = tab
+					}
+				}
+			}
+			"Agricultural Extension Officer"
+			{
+				name = "Agricultural Extension Officer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Support farmers with on-ground guidance using app-generated insights \n"
+				ModulePermissions
+				{
+					farm_layout
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_layout_Report={"View","Edit","Delete"}
+						}
+					}
+					soil_health_analysis
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_health_analysis_by_trend_period={"View","Edit","Delete"}
+							soil_health_analysis_Report={"View","Edit","Delete"}
+						}
+					}
+					farm_data
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							farm_data_Report={"View","Edit","Delete"}
+						}
+					}
+					crop_recommendation
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							crop_recommendation_Report={"View","Edit","Delete"}
+							crop_recommendation_by_soil_type={"View","Edit","Delete"}
+						}
+					}
+					soil_test
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							soil_test_by_test_result={"View","Edit","Delete"}
+							soil_test_Report={"View","Edit","Delete"}
+						}
+					}
+					ai_query
+					{
+						enabled= Viewall,Modifyall 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							ai_query_Report={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+
+	web
+	{
+		forms
+		{
+			form ai_query
+			{
+				label placement = left
+			}
+			form crop_recommendation
+			{
+				label placement = left
+			}
+			form farm_data
+			{
+				label placement = left
+			}
+			form farm_layout
+			{
+				label placement = left
+			}
+			form soil_health_analysis
+			{
+				label placement = left
+			}
+			form soil_test
+			{
+				label placement = left
+			}
+			form weather_forecast
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report farm_data_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								farm_name as "Farm Name"
+								location as "Location"
+								planting_date as "Planting Date"
+								irrigation_schedule as "Irrigation Schedule"
+								harvest_output as "Harvest Output"
+								crop_type as "Crop Type"
+								soil_test_id as "Soil Test Id"
+								farm_manager as "Farm Manager"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								farm_name as "Farm Name"
+								location as "Location"
+								planting_date as "Planting Date"
+								irrigation_schedule as "Irrigation Schedule"
+								harvest_output as "Harvest Output"
+								crop_type as "Crop Type"
+								soil_test_id as "Soil Test Id"
+								farm_manager as "Farm Manager"
+							)
+						)
+						datablock2
+						(
+							layout type = -2
+		     				title = "Soil Test Id"
+		     				related field = soil_test_id
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+								test_date as "Test Date"
+								ph_level as "PH Level"
+								nitrogen as "Nitrogen"
+								phosphorus as "Phosphorus"
+								potassium as "Potassium"
+								organic_matter as "Organic Matter"
+								test_result as "Test Result"
+								soil_health_trend as "Soil Health Trend"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report ai_query_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								query_text as "Query Text"
+								response_text as "Response Text"
+								query_timestamp as "Query Timestamp"
+								user_query_id as "User Query Id"
+								related_crop as "Related Crop"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								query_text as "Query Text"
+								response_text as "Response Text"
+								query_timestamp as "Query Timestamp"
+								user_query_id as "User Query Id"
+								related_crop as "Related Crop"
+							)
+						)
+						datablock2
+						(
+							layout type = -2
+		     				title = "Related Crop"
+		     				related field = related_crop
+							fields
+							(
+								soil_type as "Soil Type"
+								climate_zone as "Climate Zone"
+								historical_yield as "Historical Yield"
+								recommended_crop as "Recommended Crop"
+								season as "Season"
+								soil_ph as "Soil PH"
+								moisture_level as "Moisture Level"
+								suggestion_date as "Suggestion Date"
+								last_updated as "Last Updated"
+								recommendation_id as "Recommendation Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report soil_test_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+								test_date as "Test Date"
+								ph_level as "PH Level"
+								nitrogen as "Nitrogen"
+								phosphorus as "Phosphorus"
+								potassium as "Potassium"
+								organic_matter as "Organic Matter"
+								test_result as "Test Result"
+								soil_health_trend as "Soil Health Trend"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+								test_date as "Test Date"
+								ph_level as "PH Level"
+								nitrogen as "Nitrogen"
+								phosphorus as "Phosphorus"
+								potassium as "Potassium"
+								organic_matter as "Organic Matter"
+								test_result as "Test Result"
+								soil_health_trend as "Soil Health Trend"
+							)
+						)
+						datablock2
+						(
+							layout type = -2
+		     				title = "Farm Name"
+		     				related field = farm_name
+							fields
+							(
+								farm_name as "Farm Name"
+								location as "Location"
+								planting_date as "Planting Date"
+								irrigation_schedule as "Irrigation Schedule"
+								harvest_output as "Harvest Output"
+								crop_type as "Crop Type"
+								soil_test_id as "Soil Test Id"
+								farm_manager as "Farm Manager"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report soil_test_by_test_result
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+								test_date as "Test Date"
+								ph_level as "PH Level"
+								nitrogen as "Nitrogen"
+								phosphorus as "Phosphorus"
+								potassium as "Potassium"
+								organic_matter as "Organic Matter"
+								test_result as "Test Result"
+								soil_health_trend as "Soil Health Trend"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report crop_recommendation_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								soil_type as "Soil Type"
+								climate_zone as "Climate Zone"
+								historical_yield as "Historical Yield"
+								recommended_crop as "Recommended Crop"
+								season as "Season"
+								soil_ph as "Soil PH"
+								moisture_level as "Moisture Level"
+								suggestion_date as "Suggestion Date"
+								last_updated as "Last Updated"
+								recommendation_id as "Recommendation Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								soil_type as "Soil Type"
+								climate_zone as "Climate Zone"
+								historical_yield as "Historical Yield"
+								recommended_crop as "Recommended Crop"
+								season as "Season"
+								soil_ph as "Soil PH"
+								moisture_level as "Moisture Level"
+								suggestion_date as "Suggestion Date"
+								last_updated as "Last Updated"
+								recommendation_id as "Recommendation Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report crop_recommendation_by_soil_type
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								recommended_crop as "Recommended Crop"
+								climate_zone as "Climate Zone"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								soil_type as "Soil Type"
+								climate_zone as "Climate Zone"
+								historical_yield as "Historical Yield"
+								recommended_crop as "Recommended Crop"
+								season as "Season"
+								soil_ph as "Soil PH"
+								moisture_level as "Moisture Level"
+								suggestion_date as "Suggestion Date"
+								last_updated as "Last Updated"
+								recommendation_id as "Recommendation Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report farm_layout_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								layout_name as "Layout Name"
+								farm_name as "Farm Name"
+								ai_generated_image as "AI Generated Image"
+								crop_rotation_plan as "Crop Rotation Plan"
+								planning_date as "Planning Date"
+								layout_version as "Layout Version"
+								visual_description as "Visual Description"
+								area_size as "Area Size"
+								designer as "Designer"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								layout_name as "Layout Name"
+								farm_name as "Farm Name"
+								ai_generated_image as "AI Generated Image"
+								crop_rotation_plan as "Crop Rotation Plan"
+								planning_date as "Planning Date"
+								layout_version as "Layout Version"
+								visual_description as "Visual Description"
+								area_size as "Area Size"
+								designer as "Designer"
+							)
+						)
+						datablock2
+						(
+							layout type = -2
+		     				title = "Farm Name"
+		     				related field = farm_name
+							fields
+							(
+								farm_name as "Farm Name"
+								location as "Location"
+								planting_date as "Planting Date"
+								irrigation_schedule as "Irrigation Schedule"
+								harvest_output as "Harvest Output"
+								crop_type as "Crop Type"
+								soil_test_id as "Soil Test Id"
+								farm_manager as "Farm Manager"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report weather_forecast_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								location as "Location"
+								forecast_date as "Forecast Date"
+								temperature as "Temperature"
+								precipitation as "Precipitation"
+								wind_speed as "Wind Speed"
+								humidity as "Humidity"
+								weather_condition as "Weather Condition"
+								alert_level as "Alert Level"
+								forecast_id as "Forecast Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								location as "Location"
+								forecast_date as "Forecast Date"
+								temperature as "Temperature"
+								precipitation as "Precipitation"
+								wind_speed as "Wind Speed"
+								humidity as "Humidity"
+								weather_condition as "Weather Condition"
+								alert_level as "Alert Level"
+								forecast_id as "Forecast Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report weather_forecast_by_weather_condition
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								location as "Location"
+								forecast_date as "Forecast Date"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								location as "Location"
+								forecast_date as "Forecast Date"
+								temperature as "Temperature"
+								precipitation as "Precipitation"
+								wind_speed as "Wind Speed"
+								humidity as "Humidity"
+								weather_condition as "Weather Condition"
+								alert_level as "Alert Level"
+								forecast_id as "Forecast Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report soil_health_analysis_Report
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = -1
+						datablock1
+						(
+							layout type = -1
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								trend_period as "Trend Period"
+								health_score as "Health Score"
+								recommendation as "Recommendation"
+								analysis_date as "Analysis Date"
+								trend_direction as "Trend Direction"
+								action_plan as "Action Plan"
+								analyst as "Analyst"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+		     				title = "Overview"
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								trend_period as "Trend Period"
+								health_score as "Health Score"
+								recommendation as "Recommendation"
+								analysis_date as "Analysis Date"
+								trend_direction as "Trend Direction"
+								action_plan as "Action Plan"
+								analyst as "Analyst"
+							)
+						)
+						datablock2
+						(
+							layout type = -2
+		     				title = "Soil Test Id"
+		     				related field = soil_test_id
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								farm_name as "Farm Name"
+								test_date as "Test Date"
+								ph_level as "PH Level"
+								nitrogen as "Nitrogen"
+								phosphorus as "Phosphorus"
+								potassium as "Potassium"
+								organic_matter as "Organic Matter"
+								test_result as "Test Result"
+								soil_health_trend as "Soil Health Trend"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+			report soil_health_analysis_by_trend_period
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								analyst as "Analyst"
+								soil_test_id as "Soil Test Id"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    		 				Add 
+    		 				Import 
+    		 				Export 
+    	 				)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+    				)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = -2
+							fields
+							(
+								soil_test_id as "Soil Test Id"
+								trend_period as "Trend Period"
+								health_score as "Health Score"
+								recommendation as "Recommendation"
+								analysis_date as "Analysis Date"
+								trend_direction as "Trend Direction"
+								action_plan as "Action Plan"
+								analyst as "Analyst"
+							)
+						)
+					)
+					menu
+    				(
+    	 				header
+    	 				(
+    		 				Edit 
+    		 				Duplicate 
+    		 				Delete 
+    		 				Print 
+    	 				)
+    				)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Farm Data"
+					icon = "ui-1-database"
+					form  farm_data
+					{
+						icon = "ui-1-bold-add"
+					}
+					report farm_data_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Ai Queries"
+					icon = "tech-desktop"
+					form  ai_query
+					{
+						icon = "ui-1-bold-add"
+					}
+					report ai_query_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section Section_4
+				{
+					displayname = "Soil Tests"
+					icon = "nature-plant-ground"
+					form  soil_test
+					{
+						icon = "ui-1-bold-add"
+					}
+					report soil_test_Report
+					{
+						icon = "travel-world"
+					}
+					report soil_test_by_test_result
+					{
+						icon = "education-flask"
+					}
+				}
+				section Section_5
+				{
+					displayname = "Crop Recommendations"
+					icon = "design-crop"
+					form  crop_recommendation
+					{
+						icon = "ui-1-bold-add"
+					}
+					report crop_recommendation_Report
+					{
+						icon = "travel-world"
+					}
+					report crop_recommendation_by_soil_type
+					{
+						icon = "nature-plant-ground"
+					}
+				}
+				section Section_6
+				{
+					displayname = "Farm Layouts"
+					icon = "transportation-tractor"
+					form  farm_layout
+					{
+						icon = "ui-1-bold-add"
+					}
+					report farm_layout_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section Section_7
+				{
+					displayname = "Weather Forecasts"
+					icon = "weather-wind"
+					form  weather_forecast
+					{
+						icon = "ui-1-bold-add"
+					}
+					report weather_forecast_Report
+					{
+						icon = "weather-wind"
+					}
+					report weather_forecast_by_weather_condition
+					{
+						icon = "weather-wind"
+					}
+				}
+				section Section_8
+				{
+					displayname = "Soil Health Analyses"
+					icon = "nature-plant-ground"
+					form  soil_health_analysis
+					{
+						icon = "ui-1-bold-add"
+					}
+					report soil_health_analysis_Report
+					{
+						icon = "health-woman"
+					}
+					report soil_health_analysis_by_trend_period
+					{
+						icon = "business-chart-bar-33"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			new theme = 11
+			font = "poppins"
+			color options
+			{
+				color = "5"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		forms
+		{
+			form ai_query
+			{
+				label placement = auto
+			}
+			form crop_recommendation
+			{
+				label placement = auto
+			}
+			form farm_data
+			{
+				label placement = auto
+			}
+			form farm_layout
+			{
+				label placement = auto
+			}
+			form soil_health_analysis
+			{
+				label placement = auto
+			}
+			form soil_test
+			{
+				label placement = auto
+			}
+			form weather_forecast
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		forms
+		{
+			form ai_query
+			{
+				label placement = auto
+			}
+			form crop_recommendation
+			{
+				label placement = auto
+			}
+			form farm_data
+			{
+				label placement = auto
+			}
+			form farm_layout
+			{
+				label placement = auto
+			}
+			form soil_health_analysis
+			{
+				label placement = auto
+			}
+			form soil_test
+			{
+				label placement = auto
+			}
+			form weather_forecast
+			{
+				label placement = auto
+			}
+		}
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				color = red
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
